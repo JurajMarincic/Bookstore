@@ -30,16 +30,16 @@
         @foreach (var product in Model)
         {
             <tr>
-                <th>@product.Name</th>
+                <th>@product.Title</th>
                 <th>@product.Price</th>
                 <td>
                     <div class="w-75 btn-group" role="group">
-                        <a asp-controller="Product" asp-action="Edit" asp-route-categoryId="@product.Id" class="btn btn-sprimary">
+                        <a asp-controller="Product" asp-action="Edit" asp-route-productId="@product.Id" class="btn btn-primary">
                             <i class="bi bi-pencil">
                                 Edit
                             </i>
                         </a>
-                        <a asp-controller="Product" asp-action="Delete" class="btn btn-danger mx-2">
+                        <a asp-controller="Product" asp-action="Delete" asp-route-productId="@product.Id" class="btn btn-danger mx-2">
                             <i class="bi bi-trash">
                                 Delete
                             </i>
