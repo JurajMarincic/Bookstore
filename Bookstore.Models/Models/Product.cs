@@ -1,5 +1,7 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bookstore.Models.Models
 {
@@ -16,15 +18,19 @@ namespace Bookstore.Models.Models
         [Required]
         public string Author { get; set; }
         [DisplayName("List price")]
-        [Range(1D,1000D)]
+        [Range(1D, 1000D)]
         public double ListPrice { get; set; }
-        [Range(1D,1000D)]
+        [Range(1D, 1000D)]
         public double Price { get; set; }
         [DisplayName("Price for 50+")]
         public double Price50 { get; set; }
         [DisplayName("Price for 100+")]
         public double Price100 { get; set; }
-
+        public int CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
+        [ValidateNever]
+        public Category Category {  get; set; }
+        public string ImageUrl { get; set; }
 
     }
 }

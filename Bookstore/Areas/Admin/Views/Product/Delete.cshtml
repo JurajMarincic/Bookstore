@@ -1,13 +1,13 @@
-﻿@model Category
+﻿@model Product
 
-<p>Edit Category</p>
+<p>Delete a product</p>
 
 <div class="card shadow border-0 mt-4">
     <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
                 <h2 class="text-white py-2">
-                    Edit
+                    Delete
                 </h2>
             </div>
         </div>
@@ -17,21 +17,27 @@
             <input asp-for="Id" hidden />
             <div class="border p-3">
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="Name" class="form-control border-0" />
-                    <label asp-for="Name" class="ms-2 border-0 text-dark"></label>
-                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <p><label asp-for="Title" class="ms-2 border-0 text-dark"></label></p>
                 </div>
+                <p>@Model.Title</p>
                 <div class="form-floating py-2 col-12">
-                    <input asp-for="DisplayOrder" class="form-control border-0" />
-                    <label asp-for="DisplayOrder" class="ms-2 text-dark"></label>
-                    <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+                    <p><label asp-for="Price" class="ms-2 text-dark"></label></p>
                 </div>
+                <p>@Model.Price</p>
+                <div class="form-floating py-2 col-12">
+                    <p><label asp-for="Author" class="ms-2 text-dark"></label></p>
+                </div>
+                <p>@Model.Author</p>
+                <div class="form-floating py-2 col-12">
+                    <p><label asp-for="ISBN" class="ms-2 text-dark"></label></p>
+                </div>
+                <p>@Model.ISBN</p>
                 <div class="row pt-2">
                     <div class="col-6 col-md-3">
                         <button type="submit" class="btn btn-primary form-control">Delete</button>
                     </div>
                     <div class="col-6 col-md-3">
-                        <a asp-controller="Category" asp-action="Index" class="btn btn-outline-primary border form-control">
+                        <a asp-controller="Product" asp-action="Index" class="btn btn-outline-primary border form-control">
                             Back to list
                         </a>
                     </div>

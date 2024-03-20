@@ -4,7 +4,7 @@ using Bookstore.Models.Models;
 using Microsoft.AspNetCore.Mvc;
 using Bookstore.DataAccess.Repository.IRepository;
 
-namespace Bookstore.Controllers
+namespace Bookstore.Areas.Admin.Controllers
 {
     public class CategoryController : Controller
     {

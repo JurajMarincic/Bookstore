@@ -39,11 +39,19 @@ namespace Bookstore.DataAccess.Migrations
                     ListPrice = table.Column<double>(type: "float", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     Price50 = table.Column<double>(type: "float", nullable: false),
-                    Price100 = table.Column<double>(type: "float", nullable: false)
+                    Price100 = table.Column<double>(type: "float", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Products_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -55,16 +63,21 @@ namespace Bookstore.DataAccess.Migrations
                     { 2, 2, "Novel" },
                     { 3, 3, "Thriller" }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_CategoryId",
+                table: "Products",
+                column: "CategoryId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Categories");
         }
     }
 }
