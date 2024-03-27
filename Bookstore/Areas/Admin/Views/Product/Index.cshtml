@@ -15,23 +15,38 @@
     </div>
 </div>
 
-<table class="table table-bordered table-striped">
+<table id="tblData" class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>
-                Product Name
+                Title
             </th>
             <th>
                 Price
             </th>
-        </tr>
+            <th>
+                ISBN
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+
+            </th>
+            </tr>
     </thead>
-    <tbody>
+    @* <tbody>
         @foreach (var product in Model)
         {
             <tr>
                 <th>@product.Title</th>
                 <th>@product.Price</th>
+                <th>@product.Author</th>
+                <th>@product.Category.Name</th>
+                <th></th>
                 <td>
                     <div class="w-75 btn-group" role="group">
                         <a asp-controller="Product" asp-action="Upsert" asp-route-productId="@product.Id" class="btn btn-primary">
@@ -48,5 +63,9 @@
                 </td>
             </tr>
         }
-    </tbody>
+    </tbody> *@
 </table>
+
+@section Scripts{
+    <script src="~/js/product.js"></script>
+}
