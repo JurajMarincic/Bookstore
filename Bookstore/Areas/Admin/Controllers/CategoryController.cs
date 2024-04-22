@@ -9,7 +9,7 @@ using Bookstore.Utilities;
 namespace Bookstore.Areas.Admin.Controllers;
 
 [Area("Admin")]
-[Authorize(Roles = "Admin")]
+[Authorize(Roles = Role.RoleAdmin)]
 public class CategoryController : Controller
 {
     //private readonly ApplicationDbContext _context;
