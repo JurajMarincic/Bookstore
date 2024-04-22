@@ -12,6 +12,7 @@ public class UnitOfWork : IUnitOfWork
 {
     private ApplicationDbContext _context;
 
+    public ICompanyRepository Company { get; set; }
     public IProductRepository Product {  get; private set; }
     public ICategoryRepository Category { get; private set; }
 
@@ -20,6 +21,7 @@ public class UnitOfWork : IUnitOfWork
         _context = context;
         Category = new CategoryRepository(_context);
         Product = new ProductRepository(_context);
+        Company = new CompanyRepository(_context);
     }
     public void Save()
     {
