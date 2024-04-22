@@ -2,12 +2,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Bookstore.DataAccess.Data;
-using Bookstore.DataAccess.Repository.IRepository;
 using Bookstore.Models.Models;
 using Bookstore.Models.ViewModels;
+using Bookstore.Utilities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Bookstore.Areas.Admin.Controllers;
 
+[Area("Admin")]
+[Authorize(Roles = Role.RoleAdmin)]
 public class CompanyController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;

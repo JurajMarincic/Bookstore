@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+
 namespace Bookstore.DataAccess.Data;
 
 public class ApplicationDbContext : IdentityDbContext<IdentityUser>

@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Identity\Data\**" />
+    <Compile Remove="Controllers\**" />
+    <Content Remove="Areas\Identity\Data\**" />
+    <Content Remove="Controllers\**" />
+    <EmbeddedResource Remove="Areas\Identity\Data\**" />
+    <EmbeddedResource Remove="Controllers\**" />
+    <None Remove="Areas\Identity\Data\**" />
+    <None Remove="Controllers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.4" />
@@ -23,11 +34,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Bookstore.DataAccess\Bookstore.DataAccess.csproj" />
     <ProjectReference Include="..\Bookstore.Models\Bookstore.Models.csproj" />
+    <ProjectReference Include="..\Bookstore.Utilities\Bookstore.Utilities.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Identity\Data\" />
-    <Folder Include="Controllers\" />
     <Folder Include="wwwroot\images\product\" />
   </ItemGroup>
 
