@@ -19,7 +19,7 @@ public class CompanyController : Controller
     {
         _unitOfWork = unitOfWork;
     }
-
+    [AllowAnonymous]
     public IActionResult Index()
     {
         List<Company> companyList = _unitOfWork.Company.GetAll().ToList();

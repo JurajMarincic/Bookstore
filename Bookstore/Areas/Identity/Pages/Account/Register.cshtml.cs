@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
+using Bookstore.DataAccess.Repository.IRepository;
 using Bookstore.Models.Models;
 using Bookstore.Utilities;
 using Microsoft.AspNetCore.Authentication;
@@ -21,7 +22,9 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.DiaSymReader;
 using Microsoft.Extensions.Logging;
+using Mono.TextTemplating;
 
 
 namespace Bookstore.Areas.Identity.Pages.Account
@@ -31,6 +34,7 @@ namespace Bookstore.Areas.Identity.Pages.Account
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly IUnitOfWork _companyManager;
         private readonly IUserStore<IdentityUser> _userStore;
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
@@ -42,6 +46,7 @@ namespace Bookstore.Areas.Identity.Pages.Account
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
+            IUnitOfWork companyManager,
             IEmailSender emailSender)
         {
             _roleManager = roleManager;
@@ -51,6 +56,7 @@ namespace Bookstore.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _companyManager = companyManager;
         }
 
         /// <summary>
@@ -109,6 +115,40 @@ namespace Bookstore.Areas.Identity.Pages.Account
             public string? Role { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
+
+            public int? CompanyId { get; set; }
+            [ValidateNever]
+            public IEnumerable<SelectListItem> CompanyList { get; set; }
+
+            [Required]
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+            [Display(Name = "Name")]
+            public string Name { get; set; }
+
+            
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+            [Display(Name = "State")]
+            public string State { get; set; }
+
+            
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+            [Display(Name = "StreetAddress")]
+            public string StreetAddress { get; set; }
+
+            
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+            [Display(Name = "City")]
+            public string City { get; set; }
+
+            
+            [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+            [Display(Name = "Postal Code")]
+            public string PostalCode { get; set; }
+
+            
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+            [Display(Name = "Phone Number")]
+            public string PhoneNumber { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -127,8 +167,14 @@ namespace Bookstore.Areas.Identity.Pages.Account
                 {
                     Text = i,
                     Value = i
+                }),
+                CompanyList = _companyManager.Company.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
                 })
             };
+
 
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -144,6 +190,16 @@ namespace Bookstore.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                user.State = Input.State;
+                user.StreetAddress = Input.StreetAddress;
+                user.City = Input.City;
+                user.PostalCode = Input.PostalCode;
+                user.PhoneNumber = Input.PhoneNumber;
+                user.Name = Input.Name;
+                if(Input.Role == "Company")
+                {
+                    user.CompanyId = Input.CompanyId;
+                }
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)

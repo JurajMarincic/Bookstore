@@ -26,6 +26,8 @@ public class CategoryController : Controller
     {
         _unitOfWork = unitOfWork;
     }
+
+    [AllowAnonymous]
     public IActionResult Index()
     {
         List<Category> categoryList = _unitOfWork.Category.GetAll().ToList();

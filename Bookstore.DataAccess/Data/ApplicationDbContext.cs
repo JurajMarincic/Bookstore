@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-
 namespace Bookstore.DataAccess.Data;
 
 public class ApplicationDbContext : IdentityDbContext<IdentityUser>
