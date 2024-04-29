@@ -157,12 +157,9 @@ namespace Bookstore.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("ApplicationUserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Count")
                         .HasColumnType("int");
@@ -172,7 +169,7 @@ namespace Bookstore.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AplicationUserId");
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("ProductId");
 
@@ -429,7 +426,9 @@ namespace Bookstore.DataAccess.Migrations
                 {
                     b.HasOne("Bookstore.Models.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("AplicationUserId");
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Bookstore.Models.Models.Product", "Product")
                         .WithMany()

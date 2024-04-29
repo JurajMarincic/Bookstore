@@ -9,7 +9,7 @@ using Bookstore.Utilities;
 namespace Bookstore.Areas.Admin.Controllers;
 
 [Area("Admin")]
-[Authorize(Roles = Role.RoleAdmin)]
+
 public class CategoryController : Controller
 {
     //private readonly ApplicationDbContext _context;
@@ -26,8 +26,6 @@ public class CategoryController : Controller
     {
         _unitOfWork = unitOfWork;
     }
-
-    [AllowAnonymous]
     public IActionResult Index()
     {
         List<Category> categoryList = _unitOfWork.Category.GetAll().ToList();

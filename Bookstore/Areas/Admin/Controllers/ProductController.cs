@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Bookstore.Areas.Admin.Controllers;
 
 [Area("Admin")]
-[Authorize(Roles = Role.RoleAdmin)]
+
 public class ProductController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;

@@ -18,7 +18,7 @@ namespace Bookstore.Models.Models
         public Product Product { get; set; }
         
         public string ApplicationUserId { get; set; }
-        [ForeignKey("AplicationUserId")]
+        [ForeignKey("ApplicationUserId")]
         [ValidateNever]
         public ApplicationUser ApplicationUser { get; set; }
 
